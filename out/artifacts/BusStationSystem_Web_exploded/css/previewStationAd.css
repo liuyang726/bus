@@ -1,0 +1,85 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#playingBox{
+	width: 1080px;
+	height: 215px;
+    /*margin: 20px auto;*/
+	position: relative;
+	overflow: hidden;
+}
+#playingBox .oUlplay {
+	width: 99999px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#playingBox .oUlplay li {
+	float: left;
+}
+
+#playingBox .pre {
+	cursor: pointer;
+	width: 45px;
+	height: 45px;
+	background:url(../image/l.png)
+	position: absolute;
+	top: 190px;
+	left: 10px;
+	z-index: 10;
+}
+
+#playingBox .next {
+	cursor: pointer;
+	width: 45px;
+	height: 45px;
+	background:url(../image/r.png)
+	position: absolute;
+	top: 190px;
+	right: 10px;
+	z-index: 10;
+}
+
+#playBox1 {
+	width: 368px;
+	height: 191px;
+    /*margin: 20px auto;*/
+	position: relative;
+	overflow: hidden;
+}
+
+#playBox1 .oUlplay {
+	width: 99999px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#playBox1 .oUlplay li {
+	float: left;
+}
+
+#playBox1 .pre {
+	cursor: pointer;
+	width: 45px;
+	height: 45px;
+	background:url(../image/l.png)
+	position: absolute;
+	top: 190px;
+	left: 10px;
+	z-index: 10;
+}
+
+#playBox1 .next {
+	cursor: pointer;
+	width: 45px;
+	height: 45px;
+	background:url(../image/r.png)
+	position: absolute;
+	top: 190px;
+	right: 10px;
+	z-index: 10;
+}

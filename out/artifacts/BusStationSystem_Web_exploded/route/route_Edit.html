@@ -1,0 +1,90 @@
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../themes/color.css">
+	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../js/addTab.js"></script>
+</head>
+<body>
+ <div buttons="#stationdlg-buttons">
+	<table>
+		<tr>
+			<td>线路名称:</td>
+			<td><input id="editRouteName" class="easyui-textbox"/></td>
+			<td>首班时间:</td>
+			<td><input id="editStartTime" class="easyui-textbox"/></td>
+			<td>末班时间:</td>
+			<td><input id="editEndTime" class="easyui-textbox"/></td>
+			<td>是否可刷卡:</td>
+			<td><select id="editSwipeCard" >
+			    <option value="">---请选择---</option>
+			    <option value="1">可刷卡</option>
+			    <option value="0">不可刷卡</option>
+			    </select></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>线路信息:</td>
+			  <td colspan="4">
+			  	<div id="editStationRow" style="border:1px solid #96c2f1;width:500px;height:350px;float:left;">
+			      
+			    </div>
+			  </td>
+			  <td colspan="4">
+			    <div style="border:1px solid #96c2f1;width:500px;height:350px;">
+			        <table id="editRouteStationdg" class="easyui-datagrid" toolbar="#editRouteToolbar" title="公交站牌列表" style="height:350px;">
+	                </table>			    
+			    </div>			    
+			  </td>
+		</tr>
+	</table>
+	<div id="editRouteToolbar">
+		<div>
+			站牌首字母:
+			<select id="queryStationPinyin" onchange="getStationBypinyin()">
+						<option value=""> --- 请选择---</option>
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="C">C</option>
+						<option value="D">D</option>
+						<option value="E">E</option>
+						<option value="F">F</option>
+						<option value="G">G</option>
+						<option value="H">H</option>
+						<option value="I">I</option>
+						<option value="J">J</option>
+						<option value="K">K</option>
+						<option value="L">L</option>
+						<option value="M">M</option>
+						<option value="N">N</option>
+						<option value="O">O</option>
+						<option value="P">P</option>
+						<option value="Q">Q</option>
+						<option value="R">R</option>
+						<option value="S">S</option>
+						<option value="T">T</option>
+						<option value="U">U</option>
+						<option value="V">V</option>
+						<option value="W">W</option>
+						<option value="X">X</option>
+						<option value="Y">Y</option>
+						<option value="Z">Z</option>
+						</select>
+			站牌名称:<select id="queryStationName" >
+			</select> 
+			<a href="javascript:void(0)" onclick="queryAllStation()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+		</div>
+	</div>
+	<div id="addstationdlg-buttons" style="text-align:center;">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRouteInfo()">保存</a>
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" onclick="routeReset()">重置</a>
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="routecancel()">返回</a>
+    </div>
+    </div>
+    <script type="text/javascript" src="route_Edit.js"></script>
+</body>
+</html>

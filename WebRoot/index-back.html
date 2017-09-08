@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>智能公交站牌系统</title>
+<link rel="stylesheet" type="text/css" href="themes/default/easyui.css"
+	id="swicth-style">
+<link rel="stylesheet" type="text/css" href="themes/icon.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link type="text/css" rel="stylesheet" href="css/menu.css">
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/cookie.js"></script>
+<script type="text/javascript">
+	function addTab(title, url) {
+		if ($('#tabs').tabs('exists', title)) {
+			$('#tabs').tabs('select', title);//选中并刷新
+			var currTab = $('#tabs').tabs('getSelected');
+			var url = $(currTab.panel('options').content).attr('src');
+			if (url != undefined && currTab.panel('options').title != 'Home') {
+				$('#tabs').tabs('update', {
+					tab : currTab,
+					options : {
+						content : createFrame(url)
+					}
+				});
+			}
+		} else {
+			var content = createFrame(url);
+			$('#tabs').tabs('add', {
+				title : title,
+				content : content,
+				closable : true
+			});
+		}
+		tabClose();
+	}
+	function createFrame(url) {
+		var s = '<iframe scrolling="auto" frameborder="0"  src="' + url
+				+ '" style="width:100%;height:100%;"></iframe>';
+		return s;
+	}
+
+	function tabClose() {
+		/*双击关闭TAB选项卡*/
+		$(".tabs-inner").dblclick(function() {
+			var subtitle = $(this).children(".tabs-closable").text();
+			$('#tabs').tabs('close', subtitle);
+		});
+		/*为选项卡绑定右键*/
+		$(".tabs-inner").bind('contextmenu', function(e) {
+			$('#mm').menu('show', {
+				left : e.pageX,
+				top : e.pageY
+			});
+
+			var subtitle = $(this).children(".tabs-closable").text();
+
+			$('#mm').data("currtab", subtitle);
+			$('#tabs').tabs('select', subtitle);
+			return false;
+		});
+	}
+	//绑定右键菜单事件
+	function tabCloseEven() {
+		//刷新
+		$('#mm-tabupdate').click(function() {
+			var currTab = $('#tabs').tabs('getSelected');
+			var url = $(currTab.panel('options').content).attr('src');
+			if (url != undefined && currTab.panel('options').title != 'Home') {
+				$('#tabs').tabs('update', {
+					tab : currTab,
+					options : {
+						content : createFrame(url)
+					}
+				});
+			}
+		});
+		//关闭当前
+		$('#mm-tabclose').click(function() {
+			var currtab_title = $('#mm').data("currtab");
+			$('#tabs').tabs('close', currtab_title);
+		});
+		//全部关闭
+		$('#mm-tabcloseall').click(function() {
+			$('.tabs-inner span').each(function(i, n) {
+				var t = $(n).text();
+				if (t != 'Home') {
+					$('#tabs').tabs('close', t);
+				}
+			});
+		});
+		//关闭除当前之外的TAB
+		$('#mm-tabcloseother').click(function() {
+			var prevall = $('.tabs-selected').prevAll();
+			var nextall = $('.tabs-selected').nextAll();
+			if (prevall.length > 0) {
+				prevall.each(function(i, n) {
+					var t = $('a:eq(0) span', $(n)).text();
+					if (t != 'Home') {
+						$('#tabs').tabs('close', t);
+					}
+				});
+			}
+			if (nextall.length > 0) {
+				nextall.each(function(i, n) {
+					var t = $('a:eq(0) span', $(n)).text();
+					if (t != 'Home') {
+						$('#tabs').tabs('close', t);
+					}
+				});
+			}
+			return false;
+		});
+		//关闭当前右侧的TAB
+		$('#mm-tabcloseright').click(function() {
+			var nextall = $('.tabs-selected').nextAll();
+			if (nextall.length == 0) {
+				//msgShow('系统提示','后边没有啦~~','error');
+				alert('后边没有啦~~');
+				return false;
+			}
+			nextall.each(function(i, n) {
+				var t = $('a:eq(0) span', $(n)).text();
+				$('#tabs').tabs('close', t);
+			});
+			return false;
+		});
+		//关闭当前左侧的TAB
+		$('#mm-tabcloseleft').click(function() {
+			var prevall = $('.tabs-selected').prevAll();
+			if (prevall.length == 0) {
+				alert('到头了，前边没有啦~~');
+				return false;
+			}
+			prevall.each(function(i, n) {
+				var t = $('a:eq(0) span', $(n)).text();
+				$('#tabs').tabs('close', t);
+			});
+			return false;
+		});
+
+		//退出
+		$("#mm-exit").click(function() {
+			$('#mm').menu('hide');
+		});
+	}
+
+	var last_menu = "";
+	$(function() {
+		checkLogin();
+		$("#password").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#password").addClass("tab_active");
+			last_menu = "password";
+		});
+		$("#userInfo").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#userInfo").addClass("tab_active");
+			last_menu = "userInfo";
+		});
+		$("#adminList").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#adminList").addClass("tab_active");
+			last_menu = "adminList";
+		});
+		$("#addAdmin").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#addAdmin").addClass("tab_active");
+			last_menu = "addAdmin";
+
+		});
+		$("#busMember").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#busMember").addClass("tab_active");
+			last_menu = "busMember";
+
+		});
+		$("#adMember").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#adMember").addClass("tab_active");
+			last_menu = "adMember";
+
+		});
+		$("#adList").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#adList").addClass("tab_active");
+			last_menu = "adList";
+
+		});
+		$("#allocteAd").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#allocteAd").addClass("tab_active");
+			last_menu = "allocteAd";
+
+		});
+
+		$("#noticeList").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#noticeList").addClass("tab_active");
+			last_menu = "noticeList";
+
+		});
+		$("#addNotice").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#addNotice").addClass("tab_active");
+			last_menu = "addNotice";
+
+		});
+		$("#replyMessage").click(function() {
+			$("#" + last_menu).removeClass("tab_active");
+			$("#replyMessage").addClass("tab_active");
+			last_menu = "replyMessage";
+		});
+		tabCloseEven();
+		$('.cs-navi-tab').click(function() {
+			var $this = $(this);
+			var href = $this.attr('src');
+			var title = $this.text();
+			addTab(title, href);
+		});
+
+		var themes = {
+			'gray' : 'themes/gray/easyui.css',
+			'black' : 'themes/black/easyui.css',
+			'bootstrap' : 'themes/bootstrap/easyui.css',
+			'default' : 'themes/default/easyui.css',
+			'metro' : 'themes/metro/easyui.css'
+		};
+
+		var skins = $('.li-skinitem span').click(
+				function() {
+					var $this = $(this);
+					if ($this.hasClass('cs-skin-on'))
+						return;
+					skins.removeClass('cs-skin-on');
+					$this.addClass('cs-skin-on');
+					var skin = $this.attr('rel');
+					$('#swicth-style').attr('href', themes[skin]);
+					setCookie('cs-skin', skin, 30);
+					skin == 'dark-hive' ? $('.cs-north-logo').css('color',
+							'#FFFFFF') : $('.cs-north-logo').css('color',
+							'#000000');
+				});
+
+		if (getCookie('cs-skin')) {
+			var skin = getCookie('cs-skin');
+			$('#swicth-style').attr('href', themes[skin]);
+			$this = $('.li-skinitem span[rel=' + skin + ']');
+			$this.addClass('cs-skin-on');
+			skin == 'dark-hive' ? $('.cs-north-logo').css('color', '#FFFFFF')
+					: $('.cs-north-logo').css('color', '#000000');
+		}
+	});
+	function getMenu() {
+		if (login_user.roleName == "公交信息管理员") {
+			$("#admin").panel('close');
+			$('#adMember').hide();
+			$("#ad").panel('close');
+			$("#notice").panel('close');
+		} else if (login_user.roleName == "广告信息管理员") {
+			$("#admin").panel('close');
+			$("#notice").panel('close');
+			$('#busMember').hide();
+		} else if (login_user.roleName == "公告信息管理员") {
+			$("#admin").panel('close');
+			$("#member").panel('close');
+			$("#ad").panel('close');
+		}
+	}
+
+	function logout() {
+		$.ajax({
+			type : 'post',
+			url : 'login.do',
+			data : {
+				actionType : 'logout'
+			},
+			dataType : 'json',
+			success : function(result) {
+				if (result.result == "success") {
+					setCookie("userInfo", "", -1);
+					location.href = "login.html";
+				} else {
+					messager.alert("提示信息", "服务器处理异常！");
+				}
+			}
+		});
+	}
+	var login_user = "";
+	function checkLogin() {
+		$.ajax({
+			type : 'post',
+			url : 'UserService.do',
+			data : {
+				actionType : 'checkLogin'
+			},
+			dataType : 'json',
+			success : function(result) {
+				if (result.result == 'true') {
+					var data = getCookie("userInfo");
+					login_user = eval("(" + data.substr(1, data.length - 2)
+							+ ")");
+					$("#info").html(
+							"<span style=\"position: absolute;right: 138px;top: 47px;\">您用户名为："
+									+ login_user.userName + ",角色为:"
+									+ login_user.roleName + "</span>");
+					getMenu();
+				} else {
+					logout();
+				}
+			}
+		});
+	}
+</script>
+</head>
+<body class="easyui-layout">
+	<div region="north" border="true" class="cs-north"
+		style="height:100px;background:#B3DFDA;padding:30px">
+
+		<div class="cs-north-logo">
+			<span style="font-size:34px">智能公交站牌系统</span>
+		</div>
+		<ul class="ui-skin-nav">
+			<li class="li-skinitem" title="gray"><span class="gray"
+				rel="gray"></span></li>
+			<li class="li-skinitem" title="default"><span class="default"
+				rel="default"></span></li>
+			<li class="li-skinitem" title="bootstrap"><span
+				class="bootstrap" rel="bootstrap"></span></li>
+			<li class="li-skinitem" title="black"><span class="black"
+				rel="black"></span></li>
+			<li class="li-skinitem" title="metro"><span class="metro"
+				rel="metro"></span></li>
+		</ul>
+		<div id="info"></div>
+		<span style="position: absolute;right:50px;top:45px;"><a
+			href="javascript:void(0);" onclick="logout()">安全退出</a></span>
+	</div>
+	<div region="west" border="true" split="true" title="菜单栏"
+		class="cs-west">
+		<div class="easyui-accordion" fit="true" border="false">
+			<div id="me" title="个人信息维护" data-options="selected:true"
+				style="width:90%;">
+				<ul class="navContent " style="display:block">
+					<li id="password"><a href="javascript:void(0);"
+						src="user/password.html" class="cs-navi-tab">修改密码</a></li>
+					<li id="userInfo"><a href="javascript:void(0);"
+						src="user/userInfo.html" class="cs-navi-tab">修改个人信息</a></li>
+				</ul>
+			</div>
+			<div id="admin" title="管理员管理" style="width:90%;">
+				<ul class="navContent " style="display:block">
+					<li id="adminList"><a href="javascript:void(0);"
+						src="user/admin.html" class="cs-navi-tab">管理员列表</a></li>
+					<li id="addAdmin"><a href="javascript:void(0);"
+						src="user/admin_add.html" class="cs-navi-tab">添加管理员</a></li>
+				</ul>
+			</div>
+			<div id="member" title="会员管理" style="width:90%;">
+				<ul class="navContent " style="display:block">
+					<li id="busMember"><a href="javascript:void(0);"
+						src="member/busMember.html" class="cs-navi-tab">审核公交公司会员</a></li>
+					<li id="adMember"><a href="javascript:void(0);"
+						src="member/adMember.html" class="cs-navi-tab">审核广告商会员</a></li>
+				</ul>
+			</div>
+			<div id="ad" title="广告管理" style="width:90%;">
+				<ul class="navContent " style="display:block">
+					<li id="adList"><a href="javascript:void(0);"
+						src="adManage/adList.html" class="cs-navi-tab">审核广告</a></li>
+					<li id="allocteAd"><a href="javascript:void(0);"
+						src="adManage/alloctAdLocation.html" class="cs-navi-tab">分配广告位</a></li>
+				</ul>
+			</div>
+			<div id="notice" title="公告管理" style="width:90%;">
+				<ul class="navContent " style="display:block">
+					<li id="noticeList"><a href="javascript:void(0);"
+						src="notice/notice.html" class="cs-navi-tab">公告列表</a></li>
+					<li id="addNotice"><a href="javascript:void(0);"
+						src="notice/notice_add.html" class="cs-navi-tab">发布公告</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="mainPanle" region="center" border="true" border="false">
+		<div id="tabs" class="easyui-tabs" fit="true" border="false">
+			<div title="主页">
+				<div class="cs-home-remark" style="text-align:center;">
+					<br> <img src="image/systemback.jpg" style="height:450px;width:1100px" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="mm" class="easyui-menu cs-tab-menu">
+		<div id="mm-tabupdate">刷新</div>
+		<div class="menu-sep"></div>
+		<div id="mm-tabclose">关闭</div>
+		<div id="mm-tabcloseother">关闭其他</div>
+		<div id="mm-tabcloseall">关闭全部</div>
+	</div>
+</body>
+</html>

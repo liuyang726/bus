@@ -1,0 +1,84 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css"
+	href="../themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/color.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<link href="../css/previewStationAd.css" rel="stylesheet"
+	type="text/css" />
+<script type="text/javascript" src="previewStationAd.js"></script>
+</head>
+<body>
+	<div style="float:left;margin-left:20px;margin-top:10px;width:100%;">
+		<table>
+			<tr>
+				<td>站牌首字母:</td>
+				<td><select id="queryStationPinyin"
+					onchange="getStationByPinyin()">
+						<option value="">--- 请选择---</option>
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="C">C</option>
+						<option value="D">D</option>
+						<option value="E">E</option>
+						<option value="F">F</option>
+						<option value="G">G</option>
+						<option value="H">H</option>
+						<option value="I">I</option>
+						<option value="J">J</option>
+						<option value="K">K</option>
+						<option value="L">L</option>
+						<option value="M">M</option>
+						<option value="N">N</option>
+						<option value="O">O</option>
+						<option value="P">P</option>
+						<option value="Q">Q</option>
+						<option value="R">R</option>
+						<option value="S">S</option>
+						<option value="T">T</option>
+						<option value="U">U</option>
+						<option value="V">V</option>
+						<option value="W">W</option>
+						<option value="X">X</option>
+						<option value="Y">Y</option>
+						<option value="Z">Z</option>
+				</select></td>
+				<td>站牌名称:</td>
+				<td><select id="queryStationName">
+				</select></td>
+				<td><a href="javascript:void(0)" onclick="queryStationInfo()"
+					class="easyui-linkbutton">查询</a></td>
+			</tr>
+		</table>
+	</div>
+	<div style="float:left;margin-left:20px;margin-top:10px;">
+		<div id="rouinfodlg" class="easyui-panel" title="站牌名称"
+			style="width: 440px; height: 440px; "></div>
+	</div>
+	<div style="float:left;margin-left:20px;margin-top:10px;">
+		<div id="imgtxtaddlg" class="easyui-panel" title="图文广告信息"
+			style="width: 380px; height:220px; ">
+			<div id="playBox1">
+				<div class="pre"></div>
+				<div class="next"></div>
+				<ul class="oUlplay" id="imgtxt">
+
+				</ul>
+			</div>
+
+		</div>
+		<div id="videoaddlg" class="easyui-panel" title="视频广告信息"
+			style="width: 380px; height: 220px;text-align:center; ">
+			<video id="currentplay" width="340" controls="controls"
+				autoplay="autoplay">
+				<source type="video/mp4">
+			</video>
+		</div>
+	</div>
+	<script type="text/javascript" src="previewStation.js"></script>
+</body>
+</html>

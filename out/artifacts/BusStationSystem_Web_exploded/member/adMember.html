@@ -1,0 +1,38 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/color.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+
+</head>
+<body>
+	<div id="queryfield">
+
+		<div class="fitem" style="float: left;">
+			<label> 市区: </label> <select id="queryArea" class="easyui-combotree"
+				name="queryArea" style="width: 156px;">
+			</select>
+		</div>
+
+		<div class="fitem">
+			<a href="javascript:void(0)" onclick="queryUserList()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+		</div>
+
+	</div>
+	<table id="addg" title="广告商会员列表" class="easyui-datagrid"
+		toolbar="#addgtoolbar" style="width: auto; height: 400px;">
+	</table>
+	<div id="addgtoolbar">
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-edit" plain="true" onClick="checkAdMember()">审核广告商会员</a>
+
+	</div>
+
+	<script type="text/javascript" src="adMember.js"></script>
+</body>
+</html>

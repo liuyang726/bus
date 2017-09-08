@@ -1,0 +1,77 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../themes/color.css">
+    <link rel="stylesheet" type="text/css" href="../themes/icon.css">
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/detailview.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+
+</head>
+<body>
+	<table>
+		<tr>
+			<td>广告名称:</td>
+			<td><input id="queryAdName" class="easyui-textbox"/></td>
+			<td><a href="javascript:void(0)" onclick="queryAdverInfo()" class="easyui-linkbutton">查询</a></td>
+		</tr>
+	</table>
+	<table id="imagedg" title="图文类广告列表" class="easyui-datagrid"
+		style="height:375px;" toolbar="#imagedg2toolbar">
+	</table>
+	<div id="imagedg2toolbar">
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-edit" plain="true" onclick="editAdver()">编辑广告</a> <a
+			href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-remove" plain="true" onclick="destroyAdver()">刪除广告</a>
+	</div>
+	<div id="imagedlg"class="easyui-dialog" tittle="广告详细信息"
+		style="width: 400px; height: 300px; padding: 10px 20px" closed="true"
+		buttons="#imagedlg2buttons">
+		<form id="imagefm" method="post" novalidate>
+			<table cellpadding="5">
+				<tr>
+					<td>广告编号:</td>
+					<td><input name="adId" id="adId"
+						class="easyui-validatebox easyui-textbox" /></td>
+				</tr>
+				<tr>
+					<td>广告名称:</td>
+					<td><input name="adName" id="adName" class="easyui-validatebox easyui-textbox"
+						data-options="missingMessage:'广告名称不能为空',required:true,validType:'stringCheck'" /></td>
+				</tr>
+				<tr>
+					<td>广告内容:</td>
+					<td><input class="easyui-filebox" name="content" id="content"/></td>
+				</tr>
+				<tr>
+					<td>广告类型:</td>
+					<td><select name="adType" id="adType">
+							<option value="文本类">文本类</option>
+							<option value="图文类">图文类</option>
+							<option value="视频类">视频类</option>
+					</select></td>
+				</tr>
+				<tr>
+				  <td>预发布日期</td>
+				  <td><input id="publishDate" name ="publishDate" type="text" class="easyui-datebox"/></td>
+				</tr>
+				<tr>
+				  <td>失效日期</td>
+				  <td><input id="expiryDate" name="expiryDate" type="text" class="easyui-datebox"/></td>
+				</tr>  
+			</table>
+		</form>
+		<div id="imagedlg2buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveAdInfo()">保存</a> 
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="advercancel()">关闭</a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="image_List_ood.js"></script>
+	<script type="text/javascript" src="../js/validate.js"></script>
+</body>
+</html>

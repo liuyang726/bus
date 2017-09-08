@@ -1,0 +1,47 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/color.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<div id="infodlg" class="easyui-panel"
+		style="width: 400px; height: 280px; padding: 10px 20px" align="center">
+		<form id="infofm" method="post">
+			<table>
+				<tr>
+					<td>用户名:</td>
+					<td><input type="text" name="userName" id="userName"
+						class="easyui-validatebox easyui-textbox"
+						data-options="missingMessage:'用户名不能为空',required:true,validType:'stringCheck'" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>角色:</td>
+					<td><input type="text" name="roleName" id="roleName"
+						disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<td>所在区域:</td>
+					<td><input type="text" name="areaName" id="areaName"
+						disabled="disabled"></td>
+				</tr>
+			</table>
+		</form>
+		<div>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-ok" onClick="saveUserInfo()">保存</a> <a
+				href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onClick="cancelUserInfo()">重置</a>
+		</div>
+	</div>
+	<script type="text/javascript" src="userInfo.js"></script>
+	<script type="text/javascript" src="../js/validate.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+
+ul { list-style: none; }
+a{ text-decoration:none;}
+.navContent{display: none;margin: 0; padding: 0; font-family:"Î¢ÈíÑÅºÚ"}
+.navContent li a{display:block;text-align:center;font-size:14px;line-height:28px;color:#333}
+.navContent li a:hover{color:#fff;background-color:#277fc2}
+.tab_active{background-color:#277fc2}

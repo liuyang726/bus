@@ -1,0 +1,77 @@
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../themes/color.css">
+	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<table id="stationdg" title="公交站牌列表" class="easyui-datagrid"  toolbar="#stationdgtoolbar" style="height: 400px;" >
+	</table>
+	<div id="stationdgtoolbar">
+		<div>
+			站牌首字母:
+			<select id="queryStationPinyin" onchange="getStationBypinyin()">
+						<option value=""> --- 请选择---</option>
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="C">C</option>
+						<option value="D">D</option>
+						<option value="E">E</option>
+						<option value="F">F</option>
+						<option value="G">G</option>
+						<option value="H">H</option>
+						<option value="I">I</option>
+						<option value="J">J</option>
+						<option value="K">K</option>
+						<option value="L">L</option>
+						<option value="M">M</option>
+						<option value="N">N</option>
+						<option value="O">O</option>
+						<option value="P">P</option>
+						<option value="Q">Q</option>
+						<option value="R">R</option>
+						<option value="S">S</option>
+						<option value="T">T</option>
+						<option value="U">U</option>
+						<option value="V">V</option>
+						<option value="W">W</option>
+						<option value="X">X</option>
+						<option value="Y">Y</option>
+						<option value="Z">Z</option>
+						</select>
+			站牌名称:<select id="queryStationName" >
+			</select> 
+			<a href="javascript:void(0)" onclick="queryStationList()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+			<a href="javascript:void(0)" onclick="queryAllStation()" class="easyui-linkbutton" iconCls="icon-search">全部</a>
+		</div>
+		<div>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newStation()">添加站牌</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editStation()">编辑站牌</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyStation()">刪除站牌</a>
+		</div>
+    </div>
+	<div id="stationdlg" class="easyui-dialog" title="公交站牌信息" style="width: 400px; height: 280px; padding: 10px 20px" closed="true" buttons="#stationdlg-buttons">
+		<form id="stationfm" method="post" novalidate>
+			<table cellpadding="5">
+<!-- 		    		<tr> -->
+<!-- 		    			<td>站牌编号:</td> -->
+<!-- 		    			<td><input name="stationId" id="stationId" class="easyui-validatebox easyui-textbox" type="text" data-options="required:true,validType: {length:[0,20]}"></td> -->
+<!-- 		    		</tr> -->
+		    		<tr>
+		    			<td>站牌名称:</td>
+		    			<td><input name="stationName" class="easyui-textbox"></td>
+		    		</tr>
+		    </table>
+		</form>
+		<div id="stationdlg-buttons">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveStationInfo()">保存</a>
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="stationcancel()">关闭</a>
+	    </div>
+	</div>
+	<script type="text/javascript" src="station_List.js"></script>
+</body>
+</html>

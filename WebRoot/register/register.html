@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>login.html</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../themes/color.css">
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+		<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+	</head>
+	<body >
+	<div style="background:#B3DFDA; width:100%;height:100%;">
+	<div style="width:100%; height: 75px; padding-top:25px;text-align:center;position: absolute;top:50px;"><span style="font-size: 40px;color:#00bFFF">用户注册</span></div>
+		<div id="registerdlg" style="padding-top:50px;width: 600px; height: 250px;position: absolute;right:360px;top:150px; border: 1px solid #0000CD"
+			align="center">
+			<form id="registerfm" method="post" >
+				<table>
+					
+					<tr>
+						<td>
+							用户名:
+						</td>
+						<td>
+							<input type="text" name="userName" id="userName"
+								class="easyui-validatebox easyui-textbox" 
+								data-options="missingMessage:'用户名不能为空',required:true,validType:'stringCheck'" >
+						</td>
+					</tr>
+					<tr>
+						<td>
+							密码:
+						</td>
+						<td>
+							<input type="password" name="password" id="password"
+								class="easyui-validatebox easyui-textbox" 
+                                data-options="missingMessage:'密码不能为空',required:true,validType:'stringCheck'">
+						</td>
+					</tr>
+					<tr >
+						<td>
+							确认密码:
+						</td>
+						<td>
+							<input type="password" name="rpwd" id="rpwd"
+								class="easyui-validatebox easyui-textbox" 
+								data-options="missingMessage:'确认密码不能为空',required:true,validType:['stringCheck','equals[$(\'#password\').val()]']">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							角色:
+						</td>
+						<td>
+							<input type="radio" name="roleName" value="广告商会员" checked="checked" onclick="role()" />广告商会员
+							<input type="radio" name="roleName" value="公交公司会员" onclick="role()" />公交公司会员
+						</td>
+					</tr>
+					<tr id="area">
+						<td>
+							所在区域:
+						</td>
+						<td>
+							<select id="areaName" class="easyui-combotree" name="areaName"
+								style="width: 156px;">
+							</select>
+						</td>
+					</tr>
+			</table>
+			</form>	
+			<div >
+				<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-ok" onClick="saveMemberInfo()">保存</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-cancel" onClick="cancelMemberInfo()">关闭</a>
+		   </div>
+			
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/validate.js"></script>	
+	<script type="text/javascript" src="register.js"></script>	
+	</body>
+</html>

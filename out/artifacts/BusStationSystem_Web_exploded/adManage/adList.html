@@ -1,0 +1,39 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/color.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/detailview.js"></script>
+</head>
+<body>
+
+	<!--查询域：按照广告名称在广告列表中查询列表中的广告 -->
+	<table>
+		<tr>
+			<td>广告类型:</td>
+			<td>
+			<select id="queryAdType">
+			<option value="视频类">视频类</option>
+			<option value="图文类">图文类</option>
+			<option value="文本类">文本类</option>
+			</select>
+            </td>
+			<td>
+			<a href="javascript:void(0)" onclick="queryAdverList()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+			</td>
+		</tr>
+	</table>
+	<table id="alladdg" title="广告列表" class="easyui-datagrid"
+		style="height:375px;" toolbar="#alladdgtoolbar">
+	</table>
+	<div id="alladdgtoolbar">
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-edit" plain="true" onClick=" checkAdver()">审核广告</a>
+	</div>
+	<script type="text/javascript" src="adList.js"></script>
+</body>
+</html>
